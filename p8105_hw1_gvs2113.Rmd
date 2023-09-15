@@ -1,0 +1,6 @@
+---
+title: "Simple document"
+output: github_document
+---
+
+This document will involve all problems associated with HW 1 for Data Science (P8105).

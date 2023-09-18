@@ -12,8 +12,9 @@ This document will involve all problems associated with HW 1 for Data Science (P
 The following problem focuses on the use of inline R code, plotting and the behavior of `ggplot` for different variables. 
 
 ```{r initial library and data}
+#Loading the `moderndive` library and the `early_january_weather` datasets
+
 library(moderndive)
-library(tidyverse)
 
 data("early_january_weather")
 ```
@@ -36,15 +37,23 @@ nrow(early_january_weather)
 
 This result shows that there are 358 total observations within the data set.
 
-```{r isolating var, echo = FALSE}
-temp = pull(early_january_weather, temp)
-rain = pull (early_january_weather, precip)
-wind_speed = pull (early_january_weather,wind_speed)
+```{r}
+#To continue with my data observation analysis, I loaded the tidyverse library in order to pull information about different variables and eventually plot the given data as well. 
+library(tidyverse)
 ```
 
-By taking a closer look at the data, we can determine that in January of 2013, the temperatures ranged from `r range(temp)` degrees, the maximum precipitation was measured as `r max(rain)` and the windspeed averaged `r mean(wind_speed)`.
+By taking a closer look at the data, we can determine the following information about the provided data set variables: 
 
-Overall, the mean temperature  was `r mean(temp)` degrees. 
+* For all data observations, the following variables: origin, year and month all have the same values. This implies that each data point that was collected was gathered from an origin point that can be abbreviated as 'EWR', during the month of January, in the year 2013. 
+* The values for the day variable range between `r range(pull(early_january_weather, day))` and the hour variable values ranged between `r range(pull(early_january_weather, hour))`. 
+* The temperatures ranged from `r range(pull(early_january_weather, temp))` degrees.
+* Dewpoint and humidity were measured and varied from `r range(pull(early_january_weather, dewp))` and `r range(pull(early_january_weather, humid))` respectively. 
+* The maximum precipitation was measured as `r max(pull(early_january_weather, precip))` 
+* The provided information for wind included data on wind speed, direction, and wind gusts. Although for many of these data observations, there were instances of missing or zero-valued data points within these variable categories.
+* The atmospheric pressure was recorded in this dataset as well, however it also includes missing values. 
+* Visibility was also included and ranged from valuing between `r range(pull(early_january_weather, visib))`
+
+**Overall, the mean temperature  was `r mean(pull(early_january_weather, temp))` degrees.**
 
 A scatterplot of temperature vs. time is shown below. A pdf version of the generated plot will be saved within the project folder. 
 

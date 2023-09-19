@@ -37,21 +37,16 @@ nrow(early_january_weather)
 
 This result shows that there are 358 total observations within the data set.
 
-```{r}
+```{r, library}
 #To continue with my data observation analysis, I loaded the tidyverse library in order to pull information about different variables and eventually plot the given data as well. 
 library(tidyverse)
 ```
 
 By taking a closer look at the data, we can determine the following information about the provided data set variables: 
 
-* For all data observations, the following variables: origin, year and month all have the same values. This implies that each data point that was collected was gathered from an origin point that can be abbreviated as 'EWR', during the month of January, in the year 2013. 
-* The values for the day variable range between `r range(pull(early_january_weather, day))` and the hour variable values ranged between `r range(pull(early_january_weather, hour))`. 
-* The temperatures ranged from `r range(pull(early_january_weather, temp))` degrees.
-* Dewpoint and humidity were measured and varied from `r range(pull(early_january_weather, dewp))` and `r range(pull(early_january_weather, humid))` respectively. 
-* The maximum precipitation was measured as `r max(pull(early_january_weather, precip))` 
-* The provided information for wind included data on wind speed, direction, and wind gusts. Although for many of these data observations, there were instances of missing or zero-valued data points within these variable categories.
-* The atmospheric pressure was recorded in this dataset as well, however it also includes missing values. 
-* Visibility was also included and ranged from valuing between `r range(pull(early_january_weather, visib))`
+* For all data observations, the origin, year and month variables all have the same values. This implies that each collected data point was gathered from an origin point that can be abbreviated as 'EWR', during the month of January, in the year 2013. 
+* Later on in this problem, the variables for temperature and for the recorded time (in hours) will be used to generate a plot. The temperatures ranged from `r range(pull(early_january_weather, temp))` degrees.
+* Also, there is data provided for wind, precipitation, atmospheric pressure and other meteorological statistics included in this dataset. Upon closer inspection, I did notice that for many of the wind data observations, there are instances of missing or zero-valued data points within these variable categories.
 
 **Overall, the mean temperature  was `r mean(pull(early_january_weather, temp))` degrees.**
 
@@ -61,5 +56,29 @@ A scatterplot of temperature vs. time is shown below. A pdf version of the gener
 ggplot(early_january_weather, aes(x = time_hour, y = temp, color = humid)) + geom_point()+ ggtitle("Temperature vs. Time in Hours")
 
 ggsave("hw1_scatterplot.pdf")
+```
+
+By looking at the generated scatterplot, the data shows that over the first ~2 weeks of January in 2013, the temperature trended upwards and the humidity fluctuated with temperature. The peak in humidity was found during the latter few days of data collection as temperatures began to regulate before the final peak in temperature. 
+
+## Problem 2 
+
+Creating a data frame from instructions provided. 
+```{r, create df}
+problem2_df = tibble(
+  sample = rnorm(10),
+  vec_log = any(sample > 0),
+  vec_char = vector(mode = "character", length = 10),
+  vec_factor = factor(c("sun", "star", "moon", "star", "star", "sun", "moon", "moon", "star", "sun"), levels = c("sun", "star", "moon"))
+)
+```
+
+Attempting to take the mean of each variable in the dataframe. 
+```{r, mean df}
+levels(problem2_df)
+```
+
+Convert variables from one type to the other using `as.numeric` function. 
+```{r, convert var}
+
 ```
 

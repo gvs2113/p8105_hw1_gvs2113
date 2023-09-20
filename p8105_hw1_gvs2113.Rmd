@@ -66,19 +66,26 @@ Creating a data frame from instructions provided.
 ```{r, create df}
 problem2_df = tibble(
   sample = rnorm(10),
-  vec_log = any(sample > 0),
-  vec_char = vector(mode = "character", length = 10),
-  vec_factor = factor(c("sun", "star", "moon", "star", "star", "sun", "moon", "moon", "star", "sun"), levels = c("sun", "star", "moon"))
+  vec_log = sample > 0,
+  vec_char = c("sun", "moon", "star", "sun", "sun", "star", "moon", "sun", "star", "moon"),
+  vec_factor = factor(vec_char) 
 )
 ```
 
 Attempting to take the mean of each variable in the dataframe. 
 ```{r, mean df}
-levels(problem2_df)
+mean(pull(problem2_df, sample))
+mean(pull(problem2_df, vec_log))
+mean(pull(problem2_df, vec_char))
+mean(pull(problem2_df, vec_factor))
 ```
+The provided results show that the mean was able to be calculated for the first two variables in my dataframe (the random sample and logical vector) and did not work for the last two vectors in my dataframe (the character vector and the factor vector). The mean of the character and factor vectors were not able to be calculated because they are neither numerical or logical. 
 
-Convert variables from one type to the other using `as.numeric` function. 
-```{r, convert var}
 
+Converting variables from one type to the other using `as.numeric` function for the logical, character and factor variables. 
+```{r, convert var, eval = FALSE}
+num_vec_log = as.numeric(pull(problem2_df, vec_log))
+num_vec_char = as.numeric(pull(problem2_df, vec_char))
+num_vec_factor = as.numeric(pull(problem2_df, vec_factor))
 ```
-
+These results show that the logical vector and factor vector were able to be converted into a numeric vectors and the character vector was not. The factor vector was able to be transformed into a numerical vector because factors are stored as integers, thus the `as.numeric` function is able to turn change the classification of these integers from factors to numerical entries. Before it was turned into a numerical vector, the factor vector could not be evaluated for the mean, but after converting it, the mean can be taken. The character vector was not able to be transformed into a numerical vector and resulted in `NA` for all values since character vectors are stored as words and therefore can not be transformed into numbers. This explains why the mean cannot be taken for a character vector both before and after converting it to numeric. 
